@@ -5,27 +5,32 @@ import pages.GooglePage;
 
 public class GoogleSteps {
     
-    GooglePage google = new GooglePage();
+    GooglePage sauceDemo = new GooglePage();
 
     @Given("^navegate to google$")
     public void navigateToGoogle(){
-         google.navigateToGoogle();
+         sauceDemo.navigateToSauceDemo();
     }
 
     @When("^search something$")
     public void enterSearchCriteria(){
-        google.enterSearchCriteria("pato donald");
-        google.clickElement(".o3j99.LLD4me");
-        
+        sauceDemo.enterUser();
+        sauceDemo.enterPassword();
+        sauceDemo.logIn();
+
+        sauceDemo.openDropDown();
+        sauceDemo.selectValue();
     }
 
     @And("^Click the Search Button$")
     public void clickSearchButton(){
-        google.clickgoogleSearchXpath();
+        
     }
 
     @Then("^Get results$")
-    public void getResults(){}
+    public void getResults(){
+       
+    }
 
 
 }

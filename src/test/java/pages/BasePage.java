@@ -34,41 +34,41 @@ public class BasePage{
         driver.get(url);
     }
 
-    private WebElement FindCss(String locator){
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
-    }
-
-
-    private WebElement Findx(String locator){
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+    private WebElement Find(String locator){
+            //Verifica si existe el locator con css, si no es asi intenta con xpath
+        if (wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator))) != null){
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
         }
+        else
+             return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
 
-    public void clickElementXpath(String locator){
-        Findx(locator).click();
     }
 
+    public void verifyExpectedPageLoaded(String locator){
+        Find(locator).isDisplayed();
+    }
         
     public void clickElement(String locator){
-        FindCss(locator).click();
+        Find(locator).click();
     }   
 
     public void write(String locator, String textToWrite){
-        FindCss(locator).clear();
-        FindCss(locator).sendKeys(textToWrite);
+        Find(locator).clear();
+        Find(locator).sendKeys(textToWrite);
     }
 
     public void selectFromDropdownValue(String locator, String valueToSelect){
-        Select dropdown = new Select(Findx(locator));
+        Select dropdown = new Select(Find(locator));
         dropdown.selectByValue(valueToSelect);
     }
 
     public void selectFromDropdownIndex(String locator, String indexToSelect){
-        Select dropdown = new Select(Findx(locator));
+        Select dropdown = new Select(Find(locator));
         dropdown.selectByValue(indexToSelect);
     }
 
     public void selectFromDropDownText(String locator, String valueToSelect){
-        Select dropdown = new Select(Findx(locator));
+        Select dropdown = new Select(Find(locator));
         dropdown.selectByVisibleText(valueToSelect);
     }
 
